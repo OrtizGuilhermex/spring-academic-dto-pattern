@@ -42,7 +42,7 @@ public class CursoController {
         return cursoService.buscarCursoProfessorId(id);
     }
 
-    @GetMapping
+    @GetMapping("/buscar")
     public CursoResponseDto buscarCursoPorIdTitulo(
             @RequestParam Long id,
             @RequestParam String titulo
