@@ -4,6 +4,8 @@ import com.ctw.spring_academic_dto_pattern.dto.curso.CursoRequestDto;
 import com.ctw.spring_academic_dto_pattern.dto.curso.CursoResponseDto;
 import com.ctw.spring_academic_dto_pattern.service.CursoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,37 +18,42 @@ public class CursoController {
     private final CursoService cursoService;
 
     @PostMapping
-    public CursoResponseDto cadastrarCurso(
+    public ResponseEntity<CursoResponseDto> cadastrarCurso(
             @RequestBody CursoRequestDto cursoRequestDto,
             @RequestParam Long professorId
     ){
-        return cursoService.cadastrarCurso(cursoRequestDto, professorId);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(cursoService.cadastrarCurso(cursoRequestDto, professorId));
     }
 
     @GetMapping
-    public List<CursoResponseDto> listarCursos(){
-        return cursoService.listarCursos();
+    public ResponseEntity<List<CursoResponseDto>> listarCursos(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cursoService.listarCursos());
     }
 
     @GetMapping("/professor/nome/{nome}")
-    public List<CursoResponseDto> buscarCursoProfessorNome(
+    public ResponseEntity<List<CursoResponseDto>> buscarCursoProfessorNome(
             @PathVariable String nome
     ){
-        return cursoService.buscarCursoProfessorNome(nome);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cursoService.buscarCursoProfessorNome(nome));
     }
 
     @GetMapping("/professor/id/{id}")
-    public List<CursoResponseDto> buscarCursoProfessorId(
+    public ResponseEntity<List<CursoResponseDto>> buscarCursoProfessorId(
             @PathVariable Long id
     ){
-        return cursoService.buscarCursoProfessorId(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cursoService.buscarCursoProfessorId(id));
     }
 
     @GetMapping("/buscar")
-    public CursoResponseDto buscarCursoPorIdTitulo(
+    public ResponseEntity<CursoResponseDto> buscarCursoPorIdTitulo(
             @RequestParam Long id,
             @RequestParam String titulo
     ){
-        return cursoService.buscarCursoPorIdTitulo(id, titulo);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cursoService.buscarCursoPorIdTitulo(id, titulo));
     }
 }
