@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CursoRepository extends JpaRepository<Curso,Long> {
 
     List<Curso> findCursoByProfessorNome(String nome);
-    List<Curso> findCursoByProfossorId(Long id);
+    List<Curso> findCursoByProfessorId(Long id);
     Optional<Curso> findByIdAndTitulo(Long id, String titulo);
 
 }

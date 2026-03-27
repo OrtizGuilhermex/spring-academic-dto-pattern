@@ -55,7 +55,7 @@ public class CursoService {
     public List<CursoResponseDto> buscarCursoProfessorId(
             Long id
     ){
-        List<Curso> cursoList = cursoRepository.findCursoByProfossorId(id);
+        List<Curso> cursoList = cursoRepository.findCursoByProfessorId(id);
 
         return cursoList.stream()
                 .map(cursoMapper::toResponse)
